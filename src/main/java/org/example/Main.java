@@ -5,8 +5,31 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
-        ex2();
+        ex3();
     }
+    public static void ex3(){
+        /*
+         Define a custom exception InsufficientBalanceException that is thrown when a withdrawal
+         amount exceeds the account balance. Implement a simple banking system that allows deposits and
+         withdrawals, and handles the custom exception appropriately.
+         */
+        System.out.println("Initiating Broccoli account: ");
+        BroccoliAccount acc = new BroccoliAccount(1);
+        System.out.println("Deposit 600 broccolis: ");
+        acc.deposit(600);
+        try{
+            System.out.println("Taking 100 Broccoli: ");
+            acc.withdraw(100);
+            System.out.println("Taking 1000000 Broccoli: ");
+            acc.withdraw(1000000);
+            System.out.println("Do we get here?");
+        }
+        catch (BroccoliException e){
+            System.out.println("Nee, not enough Broccoli, you need " + e.getAmount() + " more.");
+            e.printStackTrace();
+        }
+    }
+
     public static void ex2(){
         /*
         Create a method that reads an integer from the user and checks whether it is within a certain
