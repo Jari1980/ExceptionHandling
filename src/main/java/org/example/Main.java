@@ -11,8 +11,43 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
-        ex4();
+        ex5();
     }
+    public static void ex5(){
+        /*
+        Modify the program from Exercise 1 to include a finally block that always executes, printing a
+        message to the console, regardless of whether an exception was thrown or not.
+         */
+        var scan = new Scanner(System.in);
+        int num1 = 0;
+        int num2 =  0;
+        System.out.println("Enter first integer: ");
+        try{
+            num1 = scan.nextInt();
+        } catch (Exception e) {
+            throw new RuntimeException("Bad integer");
+        } finally {
+            System.out.println("Message from final in try block for parsing first integer");
+        }
+        System.out.println("Enter second integer: ");
+        try{
+            num2 = scan.nextInt();
+        }
+        catch (Exception e){
+            throw new RuntimeException("Bad integer");
+        }finally {
+            System.out.println("Message from final in try block for parsing second integer");
+        }
+        try{
+            System.out.println(num1 + " / " + num2 + " = " + num1 / num2);
+        }
+        catch(Exception f){
+            System.out.println("Cant divide by 0.");
+        }finally {
+            System.out.println("Message from final in try block for doing a division operation");
+        }
+    }
+
     public static void ex4() {
         /*
         Write a program that attempts to read a file and parse its contents as integers. Implement
