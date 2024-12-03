@@ -1,12 +1,97 @@
 package org.example;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.NoSuchFileException;
+import java.util.InputMismatchException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
 
-        ex3();
+        ex4();
     }
+    public static void ex4() {
+        /*
+        Write a program that attempts to read a file and parse its contents as integers. Implement
+        nested try-catch blocks to handle potential exceptions like NoSuchFileException, IOException and
+        NumberFormatException.
+         */
+        var scanner = new Scanner(System.in);
+        System.out.println("Do you want to check file with only integers (1), chars + integers (2), none existing file (3)? 1-3: ");
+        int option = scanner.nextInt();
+        Scanner instreamGood = null;
+        Scanner instreamFail = null;
+        try{
+            instreamGood = new Scanner(new File("src/main/java/org/example/Exercise4.txt"));
+        }
+        catch(IOException ex1){
+            System.out.println(ex1.getCause());
+        }
+        try{
+            instreamFail = new Scanner(new File("src/main/java/org/example/Exercise4Fail.txt"));
+        }
+        catch(IOException ex2){
+            System.out.println(ex2.getCause());
+        }
+        int integerRead;
+        switch (option){
+            case 1:
+                while(instreamGood.hasNextInt()){
+                    try{
+                        System.out.println("Integers in file Exercise4.txt:");
+                        while(instreamGood.hasNextInt()){
+                            integerRead = instreamGood.nextInt();
+                            System.out.println(integerRead);
+                        }
+                    }
+                    catch(Exception e){
+                        System.out.println("This should not happen");
+                    }
+                }
+                break;
+            case 2:
+                try{
+                    while(instreamFail.hasNextInt()){
+                        System.out.println("Integers in file Exercise4Fail.txt:");
+                        while(true){
+                            try{
+                                integerRead = instreamFail.nextInt();
+                                System.out.println(integerRead);
+                            }
+                            catch(InputMismatchException e){
+                                e.getCause();
+                                System.out.println("inner error: " + e.getCause());
+                                break;
+                            }
+                        }
+                    }
+                }
+                catch(IllegalStateException e){
+                    e.getCause();
+                    System.out.println("outer error");
+                }
+                break;
+            case 3:
+                try{
+                    var noFile = new Scanner(new File("src/main/java/org/example/noFile.txt"));
+                    while(noFile.hasNextInt()){
+                        System.out.println("Integers in file noFile.txt:");
+                        while(noFile.hasNextInt()){
+                            integerRead = noFile.nextInt();
+                            System.out.println(integerRead);
+                        }
+                    }
+                }
+                catch(FileNotFoundException e){
+                    System.out.println("This file does not exist");
+                }
+                break;
+        }
+    }
+
     public static void ex3(){
         /*
          Define a custom exception InsufficientBalanceException that is thrown when a withdrawal
