@@ -4,16 +4,43 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.NoSuchFileException;
-import java.util.InputMismatchException;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
+import java.util.*;
 import java.util.regex.Pattern;
 
 public class Main {
     public static void main(String[] args) {
 
-        ex6();
+        ex7();
     }
+    public static void ex7(){
+        /*
+        Create a program that manages a list of names. Implement two methods: one for finding a
+        name in the list and another for adding a name to the list.
+        • If the name cannot be found, throw a custom exception NameNotFoundException.
+        • If a duplicate name is added to the list, throw another custom exception DuplicateNameException.
+         */
+        Names names = new Names();
+        System.out.println("Following names exist in list names: ");
+        Collection<String> list = names.getList();
+        for(String ele : list){
+            System.out.println(ele);
+        }
+        System.out.println("-------------------");
+        System.out.println("Using method findName to find Good Broccoli: ");
+        names.findName("Good Broccoli");
+        System.out.println("-------------------");
+        System.out.println("Using method findName to find Strange Broccoli: ");
+        names.findName("Strange Broccoli");
+        System.out.println("-------------------");
+        System.out.println("Using method addGoodie to add Easter Broccoli: ");
+        names.addGoodie("Easter Broccoli");
+        System.out.println("-------------------");
+        System.out.println("Using method addGoodie to add Good Broccoli: ");
+        names.addGoodie("Good Broccoli");
+    }
+
+    //public static
+
     public static void ex6(){
         /*
         Write a method that takes a string as input and checks if it is a valid email address. If not, throw
