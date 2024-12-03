@@ -1,8 +1,6 @@
 package org.example;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.NoSuchFileException;
 import java.util.*;
 import java.util.regex.Pattern;
@@ -10,8 +8,33 @@ import java.util.regex.Pattern;
 public class Main {
     public static void main(String[] args) {
 
-        ex7();
+        ex8();
     }
+    public static void ex8(){
+        /*
+        Create a Java application that writes a string of text to a file. Use the try-with-resources
+        statement to ensure that resources are automatically closed after the operation is complete.
+         */
+        Scanner scan = new Scanner(System.in);
+        try{
+            var outStream = new PrintWriter(new BufferedWriter(new FileWriter("src/main/java/org/example/Exercise8.txt")));
+            System.out.println("Write a string that will be saved to textfile: ");
+            String text = scan.nextLine();
+            try{
+                outStream.println(text);
+            }
+            catch (Exception e){
+                e.getCause();
+            }
+            finally {
+                outStream.close();
+            }
+        }
+        catch(IOException e){
+            System.out.println("mmmm");
+        }
+    }
+
     public static void ex7(){
         /*
         Create a program that manages a list of names. Implement two methods: one for finding a
@@ -39,7 +62,6 @@ public class Main {
         names.addGoodie("Good Broccoli");
     }
 
-    //public static
 
     public static void ex6(){
         /*
