@@ -7,12 +7,34 @@ import java.nio.file.NoSuchFileException;
 import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class Main {
     public static void main(String[] args) {
 
-        ex5();
+        ex6();
     }
+    public static void ex6(){
+        /*
+        Write a method that takes a string as input and checks if it is a valid email address. If not, throw
+        an IllegalArgumentException with an appropriate message.
+         */
+        var scan = new Scanner(System.in);
+        String regexPattern = "^(.+)@(\\S+)$";
+        System.out.println("Enter a email: ");
+        String epost = scan.nextLine();
+        boolean test = patternMatches(epost, regexPattern);
+        if(!test){
+            throw new IllegalArgumentException("Bad epost");
+        }
+
+    }
+    public static boolean patternMatches(String emailAddress, String regexPattern) {
+        return Pattern.compile(regexPattern)
+                .matcher(emailAddress)
+                .matches();
+    }
+
     public static void ex5(){
         /*
         Modify the program from Exercise 1 to include a finally block that always executes, printing a
